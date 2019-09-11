@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import ButtonStyle from './components/comp.js'
+import Greet from './components/text.js'
+import "./App.css";
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicks: 0,
+      show: true
+    };
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  IncrementItem = () => {
+    this.setState({ clicks: this.state.clicks + 1 });
+  }
+  DecreaseItem = () => {
+    this.setState({ clicks: this.state.clicks - 1 });
+  }
+  ToggleClick = () => {
+    this.setState({ show: !this.state.show });
+  }
+
+  render() {
+    return (
+      <div class="App">
+        <button onClick={this.IncrementItem} style={ButtonStyle}>Click to increase by 1</button>
+        <button onClick={this.DecreaseItem} style={ButtonStyle}>Click to decrease by 1</button>
+        <button onClick={this.ToggleClick} style={ButtonStyle}>
+          { this.state.show ? 'Hide number' : 'Show number' }
+        </button >
+        { this.state.show ? <h2>{ this.state.clicks }</h2> : '' }
+        <div class="App-logo">
+      <Greet name = 'bob' />
+      </div>
+      </div>
+    );
+  }
 }
+
+
 
 export default App;
